@@ -1,0 +1,26 @@
+<div class="container">
+  <h2 class="py-4">Data Filter POC</h2>
+
+  <div class="form-group mb-4">
+    <input class="form-control" type="text" [(ngModel)]="keyword" placeholder="Search Here">
+  </div>
+
+<mat-grid-list cols="4" *ngIf="(inputData | filter: keyword).length > 0; else noResults">
+  <mat-grid-tile *ngFor="let item of inputData | filter: keyword; let i = index">
+    <mat-card class="example-card"
+      [ngStyle]="item.completed ? {'background-color':'lightgreen'}: {'background-color':'lightgrey'}">
+        <p>
+          Title : {{item.title}} <br>
+          Id : {{item.id}}<br>
+          User Id : {{item.userId}}<br>
+          Completed : {{item.completed}}
+        </p>
+  </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
+  <ng-template #noResults>
+    <p>No results found for "{{keyword}}".</p>
+  </ng-template>
+</div>
